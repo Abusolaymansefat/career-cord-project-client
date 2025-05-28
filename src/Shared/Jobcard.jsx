@@ -6,6 +6,7 @@ const Jobcard = ({ job }) => {
     const { title, location, requirements, _id, salaryRange, description, company, company_logo } = job;
     return (
         <div className="card bg-base-100 w-96 shadow-sm">
+            
             <div className='flex gap-2'>
                 <figure>
                     <img
