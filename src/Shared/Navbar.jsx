@@ -3,23 +3,29 @@ import { NavLink } from "react-router";
 import { AuthContex } from "../Contexts/AuthContex/AuthContex";
 
 const Navbar = () => {
-  const {user, signOutUser} = use(AuthContex)
+  const { user, signOutUser } = use(AuthContex);
 
   const handleSignOut = () => {
     signOutUser()
-    .then(() => {
-      console.log('signed out user')
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  }
+      .then(() => {
+        console.log("signed out user");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const links = (
     <>
       <li>
         <NavLink to={"/"}>Home</NavLink>
       </li>
-      
+      {user && (
+        <>
+          <li>
+            <NavLink to={"/myApplications"}>My Applications</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
@@ -56,13 +62,20 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        {
-          user? <button onClick={handleSignOut} className="btn">sign out</button> :
+        {user ? (
+          <button onClick={handleSignOut} className="btn">
+            sign out
+          </button>
+        ) : (
           <>
-          <NavLink className="btn" to={"/register"}>Register</NavLink>
-        <NavLink className="btn" to={"/signin"}>SignIn</NavLink>
+            <NavLink className="btn" to={"/register"}>
+              Register
+            </NavLink>
+            <NavLink className="btn" to={"/signin"}>
+              SignIn
+            </NavLink>
           </>
-        }
+        )}
       </div>
     </div>
   );
