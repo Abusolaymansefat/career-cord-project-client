@@ -7,15 +7,142 @@ const AddJob = () => {
 
       <form>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend">Login</legend>
+          <legend className="fieldset-legend">Basic info</legend>
 
-          <label className="label">Email</label>
-          <input type="email" className="input" placeholder="Email" />
+          <label className="label">job Title</label>
+          <input
+            type="text"
+            name="title"
+            className="input"
+            placeholder="job title"
+          />
 
-          <label className="label">Password</label>
-          <input type="password" className="input" placeholder="Password" />
+          <label className="label">Company</label>
+          <input
+            type="text"
+            name="company"
+            className="input"
+            placeholder="company Name"
+          />
 
-          <button className="btn btn-neutral mt-4">Login</button>
+          <label className="label">Location</label>
+          <input
+            type="text"
+            name="location"
+            className="input"
+            placeholder="Company Location"
+          />
+
+          <label className="label">Company Logo</label>
+          <input
+            type="text"
+            name="company"
+            className="input"
+            placeholder="company Logo url"
+          />
+        </fieldset>
+
+        {/* job type */}
+
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+          <legend className="fieldset-legend">Job type </legend>
+
+          <div className="filter">
+            <input
+              className="btn filter-reset"
+              type="radio"
+              name="jobType"
+              aria-label="All"
+            />
+            <input
+              className="btn"
+              type="radio"
+              name="jobType"
+              value="On-Site"
+              aria-label="On-Site"
+            />
+            <input
+              className="btn"
+              type="radio"
+              name="jobType"
+              value="Remote"
+              aria-label="Remote"
+            />
+            <input
+              className="btn"
+              type="radio"
+              name="jobType"
+              value="Hybrid"
+              aria-label="Hybrid"
+            />
+          </div>
+        </fieldset>
+
+        {/* Job Category */}
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
+          <legend className="fieldset-legend">Job Category</legend>
+
+          <select
+            defaultValue="Job Category"
+            name="category"
+            className="select"
+          >
+            <option disabled={true}>Job Category</option>
+            <option>Engineering</option>
+            <option>Marketing</option>
+            <option>Finance</option>
+          </select>
+        </fieldset>
+        {/* Application Deadline */}
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
+          <legend className="fieldset-legend">Application Deadline</legend>
+
+          <input type="date" name="deadline" className="input" />
+        </fieldset>
+
+        {/* Salary Range */}
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
+          <legend className="fieldset-legend">Salary Range</legend>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div>
+              <label className="label">Minimum Salary</label>
+              <input
+                type="text"
+                name="min"
+                className="input"
+                placeholder="Minimum Salary"
+              />
+            </div>
+
+            <div>
+              <label className="label">Maximum Salary</label>
+              <input
+                type="text"
+                name="max"
+                className="input"
+                placeholder="Maximum Salary"
+              />
+            </div>
+
+            <div>
+              <label className="label">Currency</label>
+              <select
+                defaultValue="Select a Currency"
+                name="currency"
+                className="select"
+              >
+                <option disabled={true}>Select a Currency</option>
+                <option>BDT</option>
+                <option>USD</option>
+                <option>EU</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+          <legend className="fieldset-legend">Job type </legend>
         </fieldset>
       </form>
     </div>
