@@ -6,7 +6,9 @@ const AddJob = () => {
         e.preventDefault();
         const form = e.target;
         const formData= new FormData(form);
-        console.log(formData)
+        // console.log(formData)
+        const data = Object.fromEntries(formData.entries())
+        console.log(data)
     }
   return (
     <div>
