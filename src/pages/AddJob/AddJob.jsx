@@ -1,11 +1,18 @@
 import React from "react";
 
 const AddJob = () => {
+
+    const handleAddJo = e =>{
+        e.preventDefault();
+        const form = e.target;
+        const formData= new FormData(form);
+        console.log(formData)
+    }
   return (
     <div>
       <h2>please add a job </h2>
 
-      <form>
+      <form onSubmit={handleAddJo}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">Basic info</legend>
 
@@ -141,9 +148,53 @@ const AddJob = () => {
           </div>
         </fieldset>
 
+
+        {/* Job description */}
+
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend">Job type </legend>
+          <legend className="fieldset-legend">Job description </legend>
+          <textarea className="textarea" name="description" placeholder="Job description"></textarea>
         </fieldset>
+
+
+        {/* job Requirements */}
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+          <legend className="fieldset-legend">job Requirements </legend>
+
+          <textarea className="textarea" name="requirements" placeholder="Requirements (separate by comma"></textarea>
+
+        </fieldset>
+        
+        {/* job Responsibilities */}
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+          <legend className="fieldset-legend">job Responsibilities </legend>
+
+          <textarea className="textarea" name="responsibilities" placeholder="Responsibilities (separate by comma"></textarea>
+
+        </fieldset>
+        {/* job Responsibilities */}
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+          <legend className="fieldset-legend">HR Related info</legend>
+
+          <label className="label">HR Name</label>
+          <input
+            type="text"
+            name="hr_Name"
+            className="input"
+            placeholder="HR Name"
+          />
+
+          <label className="label">HR Email</label>
+          <input
+            type="text"
+            name="hr_email"
+            className="input"
+            placeholder="HR_Email"
+          />
+
+        </fieldset>
+
+        <input type="submit" className="btn" value="Add job" />
       </form>
     </div>
   );
