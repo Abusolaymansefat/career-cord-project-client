@@ -26,7 +26,8 @@ const AddJob = () => {
         //process responsibilities
 
         newJob.responsibilities = newJob.responsibilities.split(',').map(res => res.trim())
-        console.log(newJob)
+        console.log(Object.keys(newJob).length)
+
     }
   return (
     <div>
