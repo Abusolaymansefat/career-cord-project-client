@@ -1,34 +1,55 @@
 import React from "react";
 import UseAuth from "../../hooks/UseAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddJob = () => {
-  const { user } = UseAuth()
+  const { user } = UseAuth();
 
-    const handleAddJo = e =>{
-        e.preventDefault();
-        const form = e.target;
-        const formData= new FormData(form);
-        // console.log(formData)
-        const data = Object.fromEntries(formData.entries())
-        // console.log(data)
+  const handleAddJo = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    // console.log(formData)
+    const data = Object.fromEntries(formData.entries());
+    // console.log(data)
 
-        // process salaryRange
-        const {min, max, currency, ...newJob} = data
-        newJob.salaryRange = {min, max,currency}
+    // process salaryRange
+    const { min, max, currency, ...newJob } = data;
+    newJob.salaryRange = { min, max, currency };
 
-        //process requirements
-        const requirementsString = newJob.requirements;
-        const requirementsDirty = requirementsString.split(',')
-        const requirementsClean = requirementsDirty.map(req => req.trim())
-        newJob.requirements = requirementsClean
-        // console.log(requirementsDirty, requirementsClean)
+    //process requirements
+    const requirementsString = newJob.requirements;
+    const requirementsDirty = requirementsString.split(",");
+    const requirementsClean = requirementsDirty.map((req) => req.trim());
+    newJob.requirements = requirementsClean;
+    // console.log(requirementsDirty, requirementsClean)
 
-        //process responsibilities
+    //process responsibilities
 
-        newJob.responsibilities = newJob.responsibilities.split(',').map(res => res.trim())
-        console.log(Object.keys(newJob).length)
+    newJob.responsibilities = newJob.responsibilities
+      .split(",")
+      .map((res) => res.trim());
+    console.log(newJob);
 
-    }
+    //seve job to the database
+    axios
+      .post("http://localhost:3000/jobs", newJob)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "This new job has been saved and published.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <h2>please add a job </h2>
@@ -64,7 +85,7 @@ const AddJob = () => {
           <label className="label">Company Logo</label>
           <input
             type="text"
-            name="company"
+            name="logo"
             className="input"
             placeholder="company Logo url"
           />
@@ -169,29 +190,37 @@ const AddJob = () => {
           </div>
         </fieldset>
 
-
         {/* Job description */}
 
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">Job description </legend>
-          <textarea className="textarea" name="description" placeholder="Job description"></textarea>
+          <textarea
+            className="textarea"
+            name="description"
+            placeholder="Job description"
+          ></textarea>
         </fieldset>
-
 
         {/* job Requirements */}
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">job Requirements </legend>
 
-          <textarea className="textarea" name="requirements" placeholder="Requirements (separate by comma"></textarea>
-
+          <textarea
+            className="textarea"
+            name="requirements"
+            placeholder="Requirements (separate by comma"
+          ></textarea>
         </fieldset>
-        
+
         {/* job Responsibilities */}
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">job Responsibilities </legend>
 
-          <textarea className="textarea" name="responsibilities" placeholder="Responsibilities (separate by comma"></textarea>
-
+          <textarea
+            className="textarea"
+            name="responsibilities"
+            placeholder="Responsibilities (separate by comma"
+          ></textarea>
         </fieldset>
         {/* job Responsibilities */}
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
@@ -212,9 +241,7 @@ const AddJob = () => {
             defaultValue={user.email}
             className="input"
             placeholder="HR_Email"
-            
           />
-
         </fieldset>
 
         <input type="submit" className="btn" value="Add job" />
