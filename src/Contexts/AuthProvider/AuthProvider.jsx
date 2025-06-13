@@ -38,8 +38,9 @@ const AuthProvider = ({ children }) => {
       setUser(createUser);
       setLoading(false);
       if (createUser?.email){
-        const userData = {email: createUser.email };
-        axios.post('http://localhost:3000/jwt',userData, { withCredentials: true})
+        // const userData = {email: createUser.email };
+        // axios.post('http://localhost:3000/jwt',userData, { withCredentials: true})
+        axios.post('http://localhost:3000/jwt',  {email: createUser.email }, {withCredentials: true})
         .then(res => {
           console.log(" token after jwt", res.data)
           // const token =res.data.token;
